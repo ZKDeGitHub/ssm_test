@@ -17,14 +17,18 @@ public class WebInit implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
 
-        //使用java配置时，获取容器
+        // 获取上下文对象
         AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
         applicationContext.setServletContext(servletContext);
-        //注册配置类
+
+        // 注册配置类（声明配置类所在的文件）
         applicationContext.register(SpringConfig.class);
 
+        // 获取全局控制器
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(applicationContext));
+        // 拦截所有/
         dispatcher.addMapping("/");
+        // 启动优先级
         dispatcher.setLoadOnStartup(1);
 
     }
