@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 @ComponentScan("com.javasm")
 @MapperScan("com.javasm.mapper")
 @PropertySource("classpath:db.properties")
-@EnableWebMvc
+@EnableWebMvc //相当于处理器映射器与处理器适配器的配置
 public class SpringConfig {
     @Value("${driverClassName}")
     private String driverClassName;

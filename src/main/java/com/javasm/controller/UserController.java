@@ -1,7 +1,7 @@
 package com.javasm.controller;
 
 import com.javasm.entity.User;
-import com.javasm.setivce.UserService;
+import com.javasm.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,9 +13,11 @@ import javax.annotation.Resource;
  * @Date 2023/7/10 15:39
  * @注释：
  */
+//@RestController //相当于@Controller和@ResponseBody
 @Controller
 @ResponseBody
 public class UserController {
+
     @Resource
     private UserService userService;
 
