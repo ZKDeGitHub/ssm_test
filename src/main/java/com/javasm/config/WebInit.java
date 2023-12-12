@@ -23,6 +23,7 @@ public class WebInit implements WebApplicationInitializer {
 
         // 注册配置类（声明配置类所在的文件）
         applicationContext.register(SpringConfig.class);
+        applicationContext.register(SpringMvcConfig.class);
 
         // 获取全局控制器
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(applicationContext));

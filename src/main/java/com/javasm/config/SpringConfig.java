@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 /**
  * @Author zk
  * @Date 2023/7/10 15:15
- * @注释：配置类
+ * @注释：配置类spring与mybatis集成
  * @EnableAspectJAutoProxy 开启AOP的使用
  * @EnableTransactionManagement 开启事务管理
  */
@@ -23,20 +23,21 @@ import javax.sql.DataSource;
 @ComponentScan("com.javasm")
 @MapperScan("com.javasm.mapper")
 @PropertySource("classpath:db.properties")
-@EnableWebMvc //相当于处理器映射器与处理器适配器的配置
 public class SpringConfig {
+
+    /*获取文件中jdbc的配置项*/
     @Value("${driverClassName}")
     private String driverClassName;
     @Value("${url}")
     private String url;
     @Value("${jdbcUserName}")
     private String jdbcUserName;
-    @Value("${pwd}")
-    private String pwd;
+    @Value("${password}")
+    private String password;
+
 
     /**
      * 数据源的配置
-     *
      * @return
      */
     @Bean
@@ -45,7 +46,7 @@ public class SpringConfig {
         druidDataSource.setDriverClassName(driverClassName);
         druidDataSource.setUrl(url);
         druidDataSource.setUsername(jdbcUserName);
-        druidDataSource.setPassword(pwd);
+        druidDataSource.setPassword(password);
         return druidDataSource;
     }
 
@@ -58,11 +59,11 @@ public class SpringConfig {
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean() {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-//        配置数据源
+        //配置数据源
         sqlSessionFactoryBean.setDataSource(dataSource());
-//        实体类的路径 user com.javasm.entity.User
+        //实体类的路径 user com.javasm.entity.User
         sqlSessionFactoryBean.setTypeAliasesPackage("com.javasm.entity");
-//        开启驼峰标志
+        //开启驼峰标志
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         sqlSessionFactoryBean.setConfiguration(configuration);
